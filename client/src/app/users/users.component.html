@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Add New Users</h3>
+
+      <div class="list-group-item clearfix">
+        <div>
+          <input [(ngModel)]="user.name" placeholder="name" required />
+          <input
+            [(ngModel)]="user.PhoneNumber"
+            placeholder="PhoneNumber"
+            required
+          />
+          <input [(ngModel)]="user.address" placeholder="address" required />
+          <input [(ngModel)]="user.state" placeholder="state" required />
+          <input [(ngModel)]="user.city" placeholder="city" required />
+        </div>
+        <br />
+        <button (click)="addUser()">ADD</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>Users</h3>
+      <div class="list-group" *ngIf="userList">
+        <table border="2">
+          <thead>
+            <td>name</td>
+            <td>PhoneNumber</td>
+            <td>address</td>
+            <td>state</td>
+            <td>city</td>
+            <td>edit</td>
+            <td>delete</td>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of userList; let index = index">
+              <td>
+                <div *ngIf="!user.isEditable">{{ user.name }}</div>
+                <div *ngIf="user.isEditable">
+                  <input [(ngModel)]="user.name" placeholder="name" required />
+                </div>
+              </td>
+              <td>
+                <div *ngIf="!user.isEditable">{{ user.PhoneNumber }}</div>
+                <div *ngIf="user.isEditable">
+                  <input
+                    [(ngModel)]="user.PhoneNumber"
+                    placeholder="PhoneNumber"
+                    required
+                  />
+                </div>
+              </td>
+              <td>
+                <div *ngIf="!user.isEditable">{{ user.address }}</div>
+                <div *ngIf="user.isEditable">
+                  <input
+                    [(ngModel)]="user.address"
+                    placeholder="address"
+                    required
+                  />
+                </div>
+              </td>
+              <td>
+                <div *ngIf="!user.isEditable">{{ user.state }}</div>
+                <div *ngIf="user.isEditable">
+                  <input
+                    [(ngModel)]="user.state"
+                    placeholder="state"
+                    required
+                  />
+                </div>
+              </td>
+              <td>
+                <div *ngIf="!user.isEditable">{{ user.city }}</div>
+                <div *ngIf="user.isEditable">
+                  <input [(ngModel)]="user.city" placeholder="city" required />
+                </div>
+              </td>
+              <td>
+                <div
+                  class="btn btn-xs btn-default"
+                  *ngIf="!user.isEditable"
+                  (click)="user.isEditable = true"
+                >
+                  ✏
+                </div>
+                <div
+                  class="btn btn-xs btn-default"
+                  *ngIf="user.isEditable"
+                  (click)="user.isEditable = false; updateUser(user)"
+                >
+                  👍
+                </div>
+              </td>
+              <td>
+                <div
+                  class="btn btn-xs btn-default"
+                  (click)="onDeleteUser(user)"
+                >
+                  ❌
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
